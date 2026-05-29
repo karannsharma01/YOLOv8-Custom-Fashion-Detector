@@ -183,11 +183,11 @@ The model successfully learned both the original Fashionpedia categories and the
 
 <tr>
 <td>
-<img src="https://github.com/user-attachments/assets/ORIGINAL_IMAGE_ID" width="350"/>
+<img src="https://github.com/user-attachments/assets/344b6bb6-d712-442d-b487-c6a217e185f0" width="350"/>
 </td>
 
 <td>
-<img src="https://github.com/user-attachments/assets/ANNOTATED_IMAGE_ID" width="350"/>
+<img src="https://github.com/user-attachments/assets/f66dcca1-e82e-4605-af79-01b9ba3a4ffa" width="350"/>
 </td>
 </tr>
 </table>
