@@ -39,7 +39,7 @@ Total Classes: **55**
 
 Try the trained model instantly in Google Colab without local setup.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1v3io8IAY3xNIKLEbM2Kj_u1pM31dw6aV?usp=sharing)
 
 # 🧠 Model Architecture
 
