@@ -9,36 +9,7 @@ An end-to-end **YOLOv8 fine-tuning pipeline** for fashion garment detection, ext
 
 This repository trains a custom `YOLOv8n` model capable of detecting **55 fashion classes (0–54)**, including:
 
-* Sarees
-* Kurtas
-* Co-ord Sets
-* Tracksuits
-* Suits
-* Heels
-* Flats
-* Hoodies
-* Swimwear
-
 The model is specifically designed for:
-
-* 👗 Virtual Try-On Engines
-* 🧥 Fashion Recommendation Systems
-* 🛍️ E-commerce AI
-* 📦 Garment Extraction Pipelines
-* 🎯 Fashion Detection APIs
-
----
-
-# ✨ Key Features
-
-* 🔥 Fine-tuned YOLOv8n on an extended Fashionpedia dataset
-* 👘 Added Indian ethnic wear categories
-* ⚡ Optimized for L4 GPUs (24GB VRAM)
-* 📦 Transfer learning from pre-trained fashion weights
-* 🎯 High-speed real-time fashion detection
-* 🌐 URL-based inference support
-* 📊 Automatic visualization generation
-* 🧠 Mixed precision (`AMP`) training enabled
 
 ---
 
@@ -64,22 +35,11 @@ Total Classes: **55**
 
 ---
 
-# 🚀 Demo (Google Colab)
+# 🚀 Open In Colab
 
 Try the trained model instantly in Google Colab without local setup.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
-
-The demo notebook includes:
-
-* ✅ Model loading
-* ✅ URL image inference
-* ✅ Bounding box visualization
-* ✅ Confidence score extraction
-* ✅ Fashion garment detection
-* ✅ Automatic annotated image generation
-
----
 
 # 🧠 Model Architecture
 
@@ -134,45 +94,10 @@ YOLOv8-Custom-Fashion-Detector/
 │   └── data.yaml
 │
 ├── train.py
-├── test_model.py
+├── inference.py
 ├── bbox.pt
 ├── README.md
 ```
-
----
-
-# 🚀 Installation
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/yourusername/YOLOv8-Custom-Fashion-Detector.git
-
-cd YOLOv8-Custom-Fashion-Detector
-```
-
----
-
-## 2️⃣ Install Dependencies
-
-```bash
-pip install ultralytics pyyaml requests opencv-python
-```
-
----
-
-# 🏋️ Training
-
-Run the training script:
-
-```bash
-python train.py
-```
-
-# 📈 Training Results
-
-The model successfully learned both the original Fashionpedia categories and the newly added ethnic wear classes.
-
 ## 🖼️ Detection Results
 
 <table>
@@ -193,18 +118,6 @@ The model successfully learned both the original Fashionpedia categories and the
 </table>
 
 ---
-
-# 📄 Example Detection Output
-
-```text
-👘 Label: SAREE
-📊 Confidence: 87.4%
-
-📍 Bounding Box:
-Top-Left     : (210, 150)
-Bottom-Right : (680, 920)
-```
-
 # 💡 Use Cases
 
 * 👗 Virtual Try-On Systems
@@ -213,23 +126,3 @@ Bottom-Right : (680, 920)
 * 📸 Fashion Image Tagging
 * 🧠 AI Stylist Systems
 * 📦 Garment Cropping Pipelines
-
----
-
-# 🔮 Future Improvements
-
-* Segmentation Support
-* Fashion Attribute Classification
-* DensePose Integration
-* TensorRT Optimization
-* ONNX Export
-* Streamlit Demo UI
-* Real-Time Webcam Detection
-
-
-# ⭐ Acknowledgements
-
-* Ultralytics YOLOv8
-* Fashionpedia Dataset
-* PyTorch
-* OpenCV
