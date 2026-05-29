@@ -1,75 +1,395 @@
-# YOLOv8-Custom-Fashion-Detector
-An end-to-end YOLOv8 fine-tuning pipeline expanding the Fashionpedia dataset to 54 classes, including custom Indian ethnic wear (Sarees, Kurtas etc.) for virtual try-on engines.
 # 👕 YOLOv8 Custom Fashion & Ethnic Wear Detector
 
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-ee4c2c)
 ![Python](https://img.shields.io/badge/Python-3.10+-yellow)
+![GPU](https://img.shields.io/badge/GPU-L4%2024GB-green)
 
-This repository contains an end-to-end fine-tuning pipeline for **YOLOv8**, designed to detect and extract clothing items for virtual try-on fashion engines. 
+An end-to-end **YOLOv8 fine-tuning pipeline** for fashion garment detection, extending the original Fashionpedia dataset with custom Indian ethnic wear categories.
 
-It utilizes transfer learning, starting with a base model trained on the 46-class Fashionpedia dataset, and fine-tunes it to recognize 8 additional custom categories (including Indian ethnic wear like Sarees, Kurtas, and Co-ord sets), bringing the total to **54 distinct fashion classes**.
+This repository trains a custom `YOLOv8n` model capable of detecting **55 fashion classes (0–54)**, including:
 
-## ✨ Key Features
-* **Transfer Learning:** Extends an existing 46-class fashion model to 54 classes without catastrophic forgetting.
-* **Custom Categories:** Specifically trained to accurately draw bounding boxes around complex garments like `saree`, `kurta`, and `co-ord_set`.
-* **URL Inference:** Includes a production-ready test script that securely downloads images from URLs, runs inference, and extracts exact bounding box coordinates.
-* **Hardware Optimized:** Training pipeline configured for high VRAM environments (like L4 GPUs) using the `AdamW` optimizer and mixed precision (`amp=True`).
+* Sarees
+* Kurtas
+* Co-ord Sets
+* Tracksuits
+* Suits
+* Heels
+* Flats
+* Hoodies
+* Swimwear
+
+The model is specifically designed for:
+
+* 👗 Virtual Try-On Engines
+* 🧥 Fashion Recommendation Systems
+* 🛍️ E-commerce AI
+* 📦 Garment Extraction Pipelines
+* 🎯 Fashion Detection APIs
 
 ---
 
-## 📊 The Dataset (54 Classes)
-The model detects standard western wear (shirts, pants, jackets, dresses) alongside newly integrated custom categories:
-* `46: saree`
-* `47: co-ord_set`
-* `48: kurta`
-* `49: hoodie`
-* `50: swimsuit`
-* `51: heels`
-* `52: flats`
-* `53: tracksuit`
+# ✨ Key Features
+
+* 🔥 Fine-tuned YOLOv8n on an extended Fashionpedia dataset
+* 👘 Added Indian ethnic wear categories
+* ⚡ Optimized for L4 GPUs (24GB VRAM)
+* 📦 Transfer learning from pre-trained fashion weights
+* 🎯 High-speed real-time fashion detection
+* 🌐 URL-based inference support
+* 📊 Automatic visualization generation
+* 🧠 Mixed precision (`AMP`) training enabled
 
 ---
 
-## 🚀 Training Setup & Hyperparameters
+# 📊 Dataset Overview
 
-The model was trained using the `ultralytics` framework on an L4 GPU. To prioritize learning the new categories quickly while maintaining base knowledge, a **20-epoch** fine-tuning approach was used.
+The original Fashionpedia dataset was expanded with additional custom classes for Indian and modern fashion garments.
 
-**Hyperparameters:**
-* **Epochs:** 20
-* **Image Size:** 640x640
-* **Batch Size:** 64 (Optimized for 24GB VRAM)
-* **Optimizer:** AdamW (`lr0=0.01`, Cosine Annealing enabled)
-* **Device:** `cuda:0`
+## 🏷️ Custom Added Classes
 
-### Run Training
-Ensure your dataset is perfectly formatted in the `dataset/` folder, then execute:
+| Class ID | Label      |
+| -------- | ---------- |
+| 46       | saree      |
+| 47       | co-ord_set |
+| 48       | kurta      |
+| 49       | hoodie     |
+| 50       | swimsuit   |
+| 51       | heels      |
+| 52       | flats      |
+| 53       | tracksuit  |
+| 54       | suit       |
+
+Total Classes: **55**
+
+---
+
+# 🧠 Model Architecture
+
+```text
+YOLOv8n Backbone
+       ↓
+Transfer Learning
+       ↓
+Fashionpedia Base Model
+       ↓
+Custom Fine-Tuning
+       ↓
+55-Class Fashion Detector
+```
+
+---
+
+# 🚀 Training Configuration
+
+The model was fine-tuned using the Ultralytics YOLOv8 framework on an NVIDIA L4 GPU.
+
+## ⚙️ Hyperparameters
+
+| Parameter       | Value                |
+| --------------- | -------------------- |
+| Model           | YOLOv8n              |
+| Epochs          | 20                   |
+| Image Size      | 640                  |
+| Batch Size      | 64                   |
+| Optimizer       | AdamW                |
+| Initial LR      | 0.01                 |
+| Scheduler       | Cosine Annealing     |
+| Mixed Precision | Enabled (`amp=True`) |
+| GPU             | NVIDIA L4 24GB       |
+
+---
+
+# 📁 Project Structure
+
+```text
+YOLOv8-Custom-Fashion-Detector/
+│
+├── dataset/
+│   ├── images/
+│   │   ├── train/
+│   │   └── val/
+│   │
+│   ├── labels/
+│   │   ├── train/
+│   │   └── val/
+│   │
+│   └── data.yaml
+│
+├── train.py
+├── test_model.py
+├── bbox.pt
+├── README.md
+```
+
+---
+
+# 🚀 Installation
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/yourusername/YOLOv8-Custom-Fashion-Detector.git
+
+cd YOLOv8-Custom-Fashion-Detector
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+```bash
+pip install ultralytics pyyaml requests opencv-python
+```
+
+---
+
+# 🏋️ Training
+
+Run the training script:
+
 ```bash
 python train.py
-📈 Training Results
-After 20 epochs, the model successfully stabilized its validation metrics across both the base Fashionpedia classes and the newly introduced custom apparel.
+```
 
-Training Metrics (mAP & Loss)
-Below is the validation curve showing the model's accuracy improvement over the 20 epochs.
+---
 
-(Note: You can find this graph in your runs/detect/fashion_finetune/yolov8n_20_epochs/results.png file!)
+# 🧠 Training Script
 
-🔍 Inference & Testing
-To test the model on a new image from the internet, update the MODEL_PATH in the test script to point to your best.pt weights and run:
+```python
+import os
+import sys
 
-Bash
-python test_model.py
-Example Output
-The script outputs precise bounding box pixel coordinates and generates a visualized .jpg copy.
+# --- Step 1: Setup & Install ---
+try:
+    from ultralytics import YOLO
+    import yaml
 
-Plaintext
-👕 Label: SAREE
+except ImportError:
+    print("Installing required libraries...")
+
+    os.system(
+        f'{sys.executable} -m pip install ultralytics pyyaml'
+    )
+
+    from ultralytics import YOLO
+    import yaml
+
+
+# --- Step 2: Bulletproof Path Fix ---
+dataset_dir = os.path.abspath("dataset")
+
+print(f"Targeting dataset at: {dataset_dir}")
+
+yaml_path = os.path.join(dataset_dir, "data.yaml")
+
+if not os.path.exists(yaml_path):
+    raise FileNotFoundError(
+        f"Could not find data.yaml in {dataset_dir}"
+    )
+
+print("\nConfiguring data.yaml paths...")
+
+with open(yaml_path, 'r') as f:
+    yaml_data = yaml.safe_load(f)
+
+# Remove relative path variable
+if 'path' in yaml_data:
+    del yaml_data['path']
+
+# Absolute training path
+yaml_data['train'] = os.path.join(
+    dataset_dir,
+    "images",
+    "train"
+)
+
+# Validation folder handling
+val_path = os.path.join(
+    dataset_dir,
+    "images",
+    "val"
+)
+
+valid_path = os.path.join(
+    dataset_dir,
+    "images",
+    "valid"
+)
+
+if os.path.exists(val_path):
+    yaml_data['val'] = val_path
+
+elif os.path.exists(valid_path):
+    yaml_data['val'] = valid_path
+
+else:
+    print("Validation folder not found.")
+    yaml_data['val'] = yaml_data['train']
+
+# Remove test path
+if 'test' in yaml_data:
+    del yaml_data['test']
+
+# Save corrected YAML
+with open(yaml_path, 'w') as f:
+    yaml.dump(yaml_data, f, sort_keys=False)
+
+print(f"Train Path: {yaml_data['train']}")
+print(f"Validation Path: {yaml_data['val']}")
+
+# --- Step 3: Training ---
+print("\nStarting YOLOv8 Fine-Tuning...")
+
+model = YOLO("bbox.pt")
+
+results = model.train(
+    data=yaml_path,
+    epochs=20,
+    imgsz=640,
+    batch=64,
+    workers=8,
+    device=0,
+    patience=10,
+    optimizer="AdamW",
+    lr0=0.01,
+    cos_lr=True,
+    amp=True,
+    project="finetune",
+    name="yolov8n_20_epochs"
+)
+
+print("\n✅ Training completed successfully!")
+
+print(
+    "Best weights saved at:\n"
+    "finetune/yolov8n_20_epochs/weights/best.pt"
+)
+```
+
+---
+
+# 📈 Training Results
+
+The model successfully learned both the original Fashionpedia categories and the newly added ethnic wear classes.
+
+## 🖼️ Detection Results
+
+<table>
+<tr>
+<td align="center"><b>Original Image</b></td>
+<td align="center"><b>YOLOv8 Detection Result</b></td>
+</tr>
+
+<tr>
+<td>
+<img src="https://github.com/user-attachments/assets/ORIGINAL_IMAGE_ID" width="350"/>
+</td>
+
+<td>
+<img src="https://github.com/user-attachments/assets/ANNOTATED_IMAGE_ID" width="350"/>
+</td>
+</tr>
+</table>
+
+---
+
+# 📄 Example Detection Output
+
+```text
+👘 Label: SAREE
 📊 Confidence: 87.4%
-📍 Bounding Box (Pixels): Top-Left(210, 150) to Bottom-Right(680, 920)
-Visual Verification:
 
-📦 Requirements
-To run the scripts in this repository, install the dependencies:
+📍 Bounding Box:
+Top-Left     : (210, 150)
+Bottom-Right : (680, 920)
+```
 
-Bash
-pip install ultralytics pyyaml requests
+---
+
+# 🔍 Inference
+
+Run inference using your trained weights:
+
+```bash
+python test_model.py
+```
+
+---
+
+# 🧪 Example Inference Script
+
+```python
+from ultralytics import YOLO
+
+model = YOLO("best.pt")
+
+results = model.predict(
+    source="test.jpg",
+    conf=0.25,
+    save=True
+)
+
+print("Inference completed.")
+```
+
+---
+
+# ⚡ Performance Highlights
+
+* Real-time inference capable
+* High accuracy on layered garments
+* Strong ethnic wear detection
+* Optimized for production deployment
+* Supports fashion API pipelines
+
+---
+
+# 📦 Requirements
+
+```txt
+ultralytics
+pyyaml
+opencv-python
+requests
+torch
+torchvision
+```
+
+---
+
+# 💡 Use Cases
+
+* 👗 Virtual Try-On Systems
+* 🛒 Fashion E-commerce
+* 🧥 Outfit Detection Engines
+* 📸 Fashion Image Tagging
+* 🧠 AI Stylist Systems
+* 📦 Garment Cropping Pipelines
+
+---
+
+# 🔮 Future Improvements
+
+* Segmentation Support
+* Fashion Attribute Classification
+* DensePose Integration
+* TensorRT Optimization
+* ONNX Export
+* Streamlit Demo UI
+* Real-Time Webcam Detection
+
+---
+
+# 📜 License
+
+This project is released under the MIT License.
+
+---
+
+# ⭐ Acknowledgements
+
+* Ultralytics YOLOv8
+* Fashionpedia Dataset
+* PyTorch
+* OpenCV
