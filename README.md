@@ -64,6 +64,23 @@ Total Classes: **55**
 
 ---
 
+# 🚀 Live Demo (Google Colab)
+
+Try the trained model instantly in Google Colab without local setup.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
+
+The demo notebook includes:
+
+* ✅ Model loading
+* ✅ URL image inference
+* ✅ Bounding box visualization
+* ✅ Confidence score extraction
+* ✅ Fashion garment detection
+* ✅ Automatic annotated image generation
+
+---
+
 # 🧠 Model Architecture
 
 ```text
